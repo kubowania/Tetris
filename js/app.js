@@ -42,8 +42,53 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   startBtn.addEventListener('click', () => {
-    setInterval(autoDrop, 100)
+    setInterval(autoDrop, 1000)
   })
+
+
+  //The Tetrominoes
+  function oTetromino() {
+    squares[currentIndex].classList.add('oTetromino')
+    squares[currentIndex + width].classList.add('oTetromino')
+    squares[currentIndex +1].classList.add('oTetromino')
+    squares[currentIndex + width +1].classList.add('oTetromino')
+  }
+
+  function lTetromino() {
+    squares[currentIndex].classList.add('lTetromino')
+    squares[currentIndex + width].classList.add('lTetromino')
+    squares[currentIndex +width +1].classList.add('lTetromino')
+    squares[currentIndex + width +2].classList.add('lTetromino')
+  }
+
+  function zTetromino() {
+    squares[currentIndex].classList.add('zTetromino')
+    squares[currentIndex + 1].classList.add('zTetromino')
+    squares[currentIndex +width +1].classList.add('zTetromino')
+    squares[currentIndex + width +2].classList.add('zTetromino')
+  }
+
+  function tTetromino() {
+    squares[currentIndex].classList.add('tTetromino')
+    squares[currentIndex + 1].classList.add('tTetromino')
+    squares[currentIndex + 2].classList.add('tTetromino')
+    squares[currentIndex + width +1].classList.add('tTetromino')
+  }
+
+  function iTetromino() {
+    squares[currentIndex].classList.add('iTetromino')
+    squares[currentIndex + width].classList.add('iTetromino')
+    squares[currentIndex + width*2].classList.add('iTetromino')
+    squares[currentIndex + width*3].classList.add('iTetromino')
+  }
+
+  const TheTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
+
+  const random = Math.ceil(Math.random()*TheTetrominoes.length-1)
+
+  console.log(random)
+
+  TheTetrominoes[random]()
 
 
 })

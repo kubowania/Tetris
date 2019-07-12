@@ -8,6 +8,26 @@ div {
   background-color: blue;
 }
 
+.oTetromino {
+  background-color: green;
+}
+
+.lTetromino {
+  background-color: yellow;
+}
+
+.zTetromino {
+  background-color: orange;
+}
+
+.tTetromino {
+  background-color: purple;
+}
+
+.iTetromino {
+  background-color: brown;
+}
+
 .takenBlock {
   background-color: blue;
 }
