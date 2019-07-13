@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   const squares = document.querySelectorAll('.grid div')
-  const startBtn = document.getElementById('start')
+  const startBtn = document.querySelector('.button')
   let currentIndex = 0
   const width = 10
   const height = 20
 
-  //Make the square move left, right and down on the board
+  //Make the The Tetrominoes move left, right and down on the board
   function moveSquare(e) {
 
     squares[currentIndex].classList.remove('block')
@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
       currentIndex+=0
       squares[currentIndex].classList.add('takenBlock')
     }
-
   }
 
   startBtn.addEventListener('click', () => {
@@ -47,48 +46,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   //The Tetrominoes
-  function oTetromino() {
-    squares[currentIndex].classList.add('oTetromino')
-    squares[currentIndex + width].classList.add('oTetromino')
-    squares[currentIndex +1].classList.add('oTetromino')
-    squares[currentIndex + width +1].classList.add('oTetromino')
-  }
+  const lTetromino = [0,1,width+1,width+2]
+  const zTetromino = [0,1,width+1,width+2]
+  const tTetromino = [0,1,2,width+1]
+  const oTetromino = [0,1,width,width+1]
+  const iTetromino = [0,width,width*2,width*3]
 
-  function lTetromino() {
-    squares[currentIndex].classList.add('lTetromino')
-    squares[currentIndex + width].classList.add('lTetromino')
-    squares[currentIndex +width +1].classList.add('lTetromino')
-    squares[currentIndex + width +2].classList.add('lTetromino')
-  }
+  const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
-  function zTetromino() {
-    squares[currentIndex].classList.add('zTetromino')
-    squares[currentIndex + 1].classList.add('zTetromino')
-    squares[currentIndex +width +1].classList.add('zTetromino')
-    squares[currentIndex + width +2].classList.add('zTetromino')
-  }
-
-  function tTetromino() {
-    squares[currentIndex].classList.add('tTetromino')
-    squares[currentIndex + 1].classList.add('tTetromino')
-    squares[currentIndex + 2].classList.add('tTetromino')
-    squares[currentIndex + width +1].classList.add('tTetromino')
-  }
-
-  function iTetromino() {
-    squares[currentIndex].classList.add('iTetromino')
-    squares[currentIndex + width].classList.add('iTetromino')
-    squares[currentIndex + width*2].classList.add('iTetromino')
-    squares[currentIndex + width*3].classList.add('iTetromino')
-  }
-
-  const TheTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
-
-  const random = Math.ceil(Math.random()*TheTetrominoes.length-1)
+  //Randomly select Tetromino
+  const random = Math.ceil(Math.random()*theTetrominoes.length-1)
 
   console.log(random)
 
-  TheTetrominoes[random]()
+  //move the theTetrominoes
+  let currentPosition = 2
 
+  function moveDown() {
+    theTetrominoes.forEach( index => {
+      squares[currentPosition + index].classList.remove('block')
+      currentPosition +=width
+      squares[currentPosition + index].classList.add('block')
+    })
+  }
+
+  moveDown()
 
 })
