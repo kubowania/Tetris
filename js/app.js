@@ -28,25 +28,25 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keyup', moveSquare)
 
   //loop the shape to continue going down
-  function autoDrop() {
-    squares[currentIndex].classList.remove('block')
+  // function autoDrop() {
+  //   squares[currentIndex].classList.remove('block')
+  //
+  //   if(currentIndex + width < width * height) {
+  //     currentIndex += width
+  //     squares[currentIndex].classList.add('block')
+  //   } else if (squares[currentIndex + width].classList.contains('end')) {
+  //     currentIndex+=0
+  //     squares[currentIndex].classList.add('block')
+  //   }
+  // }
 
-    if(currentIndex + width < width * height) {
-      currentIndex += width
-      squares[currentIndex].classList.add('block')
-    } else if (squares[currentIndex + width].classList.contains('end')) {
-      currentIndex+=0
-      squares[currentIndex].classList.add('takenBlock')
-    }
-  }
-
-  startBtn.addEventListener('click', () => {
-    setInterval(autoDrop, 1000)
-  })
+  // startBtn.addEventListener('click', () => {
+  //   setInterval(autoDrop, 1000)
+  // })
 
 
   //The Tetrominoes
-  const lTetromino = [0,1,width+1,width+2]
+  const lTetromino = [0,1,2,width+2]
   const zTetromino = [0,1,width+1,width+2]
   const tTetromino = [0,1,2,width+1]
   const oTetromino = [0,1,width,width+1]
@@ -54,22 +54,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
+
   //Randomly select Tetromino
-  const random = Math.ceil(Math.random()*theTetrominoes.length-1)
+  const random = Math.ceil(Math.random()*theTetrominoes.length)-1
 
   console.log(random)
 
   //move the theTetrominoes
-  let currentPosition = 2
+
+  let currentPosition = 0
 
   function moveDown() {
-    theTetrominoes.forEach( index => {
-      squares[currentPosition + index].classList.remove('block')
-      currentPosition +=width
+
+
+
+    const current = theTetrominoes[random]
+
+    current.forEach( index => {
       squares[currentPosition + index].classList.add('block')
     })
+
+    current.forEach( index => {
+      squares[currentPosition + index].classList.remove('block')
+    })
+
+    currentPosition = currentPosition + width
+
+    current.forEach( index => {
+      squares[currentPosition + index + width].classList.add('block')
+    })
+
+
+
+    console.log(currentPosition)
+
   }
 
-  moveDown()
+  // squares[currentPosition + index].classList.remove('block')
+  // currentPosition +=width
+  // squares[currentPosition + index].classList.add('block')
+
+  setInterval(moveDown, 500)
 
 })

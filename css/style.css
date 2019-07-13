@@ -173,19 +173,21 @@ h2 {
 }
 
 .end {
-  background-image:-webkit-linear-gradient(top, #d8edea, #cadbd8);
+  background-image: url(/Users/limit/development/Tetris/images/blue_block.png)
+
+  /* background-image:-webkit-linear-gradient(top, #d8edea, #cadbd8);
   background-image:-moz-linear-gradient(top, #d8edea, #cadbd8);
   background-image:-ms-linear-gradient(top, #d8edea, #cadbd8);
   background-image:-o-linear-gradient(top, #d8edea, #cadbd8);
-  background-image:linear-gradient(to bottom, #d8edea, #cadbd8);
+  background-image:linear-gradient(to bottom, #d8edea, #cadbd8); */
 
-  -webkit-border-radius:5px;
+  /* -webkit-border-radius:5px;
   -moz-border-radius:5px;
   border-radius:5px;
 
   -webkit-box-shadow:0 1px 0 rgba(255, 255, 255, .5) inset, 0 -1px 0 rgba(255, 255, 255, .1) inset, 0 4px 0 #9daba8, 0 4px 2px rgba(0, 0, 0, .5);
   -moz-box-shadow:0 1px 0 rgba(255, 255, 255, .5) inset, 0 -1px 0 rgba(255, 255, 255, .1) inset, 0 4px 0 #9daba8, 0 4px 2px rgba(0, 0, 0, .5);
-  box-shadow:0 1px 0 rgba(255, 255, 255, .5) inset, 0 -1px 0 rgba(255, 255, 255, .1) inset, 0 4px 0 #9daba8, 0 4px 2px rgba(0, 0, 0, .5);
+  box-shadow:0 1px 0 rgba(255, 255, 255, .5) inset, 0 -1px 0 rgba(255, 255, 255, .1) inset, 0 4px 0 #9daba8, 0 4px 2px rgba(0, 0, 0, .5); */
 }
 
 .display {
