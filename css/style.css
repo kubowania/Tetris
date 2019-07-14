@@ -66,6 +66,11 @@ h2 {
   /* background-color: #4BC39B; */
 }
 
+.block2 {
+  background-image: url(/Users/limit/development/Tetris/images/purple_block.png);
+  /* background-color: #4BC39B; */
+}
+
 .oTetromino {
   background-color: green;
 }

@@ -28,20 +28,34 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keyup', moveSquare)
 
   //loop the shape to continue going down
-  // function autoDrop() {
-  //   squares[currentIndex].classList.remove('block')
-  //
-  //   if(currentIndex + width < width * height) {
-  //     currentIndex += width
-  //     squares[currentIndex].classList.add('block')
-  //   } else if (squares[currentIndex + width].classList.contains('end')) {
-  //     currentIndex+=0
-  //     squares[currentIndex].classList.add('block')
+  function autoDrop() {
+    squares[currentIndex].classList.remove('block')
+    if(currentIndex + width < width * height) {
+      currentIndex += width
+      squares[currentIndex].classList.add('block')
+    } else if (squares[currentIndex + width].classList.contains('block2')) {
+      currentIndex+=0
+      squares[currentIndex].classList.add('block2')
+      // freeze()
+    }
+  }
+
+  // function freeze() {
+  //   if (squares[currentIndex + width].classList.contains('block2')) {
+  //     return autoDrop()
   //   }
   // }
+  setInterval(autoDrop, 200)
+
+  function gameLoop() {
+    const currentIndex = 0
+    squares[currentIndex].classList.add('block')
+    autoDrop()
+  }
+  setInterval(gameLoop,4000)
 
   // startBtn.addEventListener('click', () => {
-  //   setInterval(autoDrop, 1000)
+  //   setInterval(autoDrop, 200)
   // })
 
 
@@ -60,40 +74,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
   console.log(random)
 
-  //move the theTetrominoes
-
-  let currentPosition = 0
-
-  function moveDown() {
 
 
 
-    const current = theTetrominoes[random]
-
-    current.forEach( index => {
-      squares[currentPosition + index].classList.add('block')
-    })
-
-    current.forEach( index => {
-      squares[currentPosition + index].classList.remove('block')
-    })
-
-    currentPosition = currentPosition + width
-
-    current.forEach( index => {
-      squares[currentPosition + index + width].classList.add('block')
-    })
-
-
-
-    console.log(currentPosition)
-
-  }
-
-  // squares[currentPosition + index].classList.remove('block')
-  // currentPosition +=width
-  // squares[currentPosition + index].classList.add('block')
-
-  setInterval(moveDown, 500)
-
+  // move the Tetrominoes
+//   let currentPosition = 0
+//
+//   function moveDown() {
+//
+//     const current = theTetrominoes[random]
+//
+//
+//     current.forEach( index => {
+//       squares[currentPosition + index].classList.add('block')
+//     })
+//     console.log(currentPosition)
+//
+//     current.forEach( index => {
+//       squares[currentPosition + index].classList.remove('block')
+//     })
+//     console.log(currentPosition)
+//
+//     currentPosition = currentPosition += width
+//
+//     current.forEach( index => {
+//       squares[currentPosition + index + width].classList.add('block')
+//       console.log(currentPosition)
+//     })
+//   }
+//
+//
+//   console.log(currentPosition)
+//
+//
+//   startBtn.addEventListener('click', () => {
+//     setInterval(moveDown, 200)
+//   })
+//
+//   //stop the blocks
+//   if (squares[currentPosition + width].classList.contains('block')) {
+//     currentPosition+=0
+//     squares[currentPosition].classList.add('block')
+//   }
+//
 })
