@@ -5,6 +5,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const width = 10
   const height = 20
 
+  //assign functions to keycodes
+  function control(e) {
+    if(e.keyCode === 39) {
+      moveright()
+    // } else if (e.keyCode == 38) {
+    //   rotate()
+    } else if (e.keyCode ===37) {
+      moveleft()
+    } else if (e.keyCode === 40) {
+      moveDown()
+    }
+  }
+  document.addEventListener('keyup', control)
+
   //The Tetrominoes
   const lTetromino = [1,1,width+1,width*2+1]
   const zTetromino = [width+1, width+2,width*2,width*2+1]
@@ -48,40 +62,41 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(moveDown, 200)
 
 //move left
-  function moveleft() {
-    draw()
-    undraw()
-      currentPosition = currentPosition +1
-  //how to I stop the whole shape if ANY of the shapes Classlist are too long for the width?
-    draw()
-  }
-  moveleft()
-
-  //move right
   function moveright() {
     draw()
     undraw()
-    currentPosition = currentPosition -1
+    currentPosition = currentPosition +=1
     //how to I stop the whole shape if ANY of the shapes Classlist are too long for the width?
     draw()
   }
   moveright()
 
+  //move right
+  function moveleft() {
+    draw()
+    undraw()
+    currentPosition = currentPosition -=1
+    //how to I stop the whole shape if ANY of the shapes Classlist are too long for the width?
+    draw()
+  }
+  moveleft()
+
   //freeze the shape
 
 //if ANY of the tetrominos currentindexes meet a div with block in it plus width, i want to envoke freeze function and change them to classList block2. this function will change ALL tetrominos classLists into block2. it will also stop them from moving.
 
-  function freeze() {
-    if squares[currentPosition + width].classList.contains('block2')) {
-      currentIndex+=0
-      squares[currentPosition].classList.add('block2')
-      current.forEach( index => {
-      squares[currentPosition + index].classList.add('block2')
-      })
-    }
-  }
-
-  freeze()
+  // function freeze() {
+  //   const current = theTetrominoes[random]
+  //   if current[currentPosition + width].classList.contains('block2')) {
+  //     currentIndex+=0
+  //     current[currentPosition].classList.add('block2')
+  //     current.forEach( index => {
+  //     squares[currentPosition + index].classList.add('block2')
+  //     })
+  //   }
+  // }
+  //
+  // freeze()
 
 
   //Rotate the Tetromino
@@ -104,10 +119,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const iTetromino4 = [1,width+1,width+2]
 
 
-  //Stop the Tetromino at the sides
+//how to I add a number to the const chosen to return the alternative Tetromino shapes above
+  // function rotate() {
+  //   let current = theTetrominoes[random]
+  //   current.forEach( index => {
+  //     squares[currentPosition + index].classList.add('block')
+  //   })
+  //   let current = current+'2'
+  //   console.log(current)
+  // }
+  // rotate()
 
 
-  //Stop the Tetromino at the end
+
 
 
 
