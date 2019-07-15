@@ -45,6 +45,16 @@ h2 {
   color: #d8edea;
 }
 
+.score-display {
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  font-size: 50px;
+  letter-spacing: 15px;
+  font-weight:300;
+  color: rgb(133,121,107,0.5);
+  padding-left: 15px;
+}
+
 .column-left {
   width: 300px;
   display: flex;
