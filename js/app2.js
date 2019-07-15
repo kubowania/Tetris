@@ -29,8 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
   //Randomly Select Tetromino
-  const random = Math.ceil(Math.random()*theTetrominoes.length)-1
-  console.log(random)
+  let random = Math.ceil(Math.random()*theTetrominoes.length)-1
 
   //move the Tetromino moveDown
   let currentPosition = 4
@@ -57,9 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
     undraw()
     currentPosition = currentPosition += width
     draw()
+    freeze()
   }
   moveDown()
-  setInterval(moveDown, 200)
+  setInterval(moveDown, 1000)
+
+  //loop game every 4000
+
 
 //move left
   function moveright() {
@@ -82,21 +85,21 @@ document.addEventListener('DOMContentLoaded', () => {
   moveleft()
 
   //freeze the shape
-
 //if ANY of the tetrominos currentindexes meet a div with block in it plus width, i want to envoke freeze function and change them to classList block2. this function will change ALL tetrominos classLists into block2. it will also stop them from moving.
 
-  // function freeze() {
-  //   const current = theTetrominoes[random]
-  //   if current[currentPosition + width].classList.contains('block2')) {
-  //     currentIndex+=0
-  //     current[currentPosition].classList.add('block2')
-  //     current.forEach( index => {
-  //     squares[currentPosition + index].classList.add('block2')
-  //     })
-  //   }
-  // }
-  //
-  // freeze()
+  function freeze() {
+    const current = theTetrominoes[random]
+    // if block has settled
+    if(current.some(index => squares[currentPosition + index + width].classList.contains('block2'))) {
+      // make it block2
+      current.forEach(index => squares[index + currentPosition].classList.add('block2'))
+      // start a new tetromino falling
+      random = Math.ceil(Math.random()*theTetrominoes.length)-1
+      currentPosition = 4
+    }
+  }
+  freeze()
+
 
 
   //Rotate the Tetromino
@@ -120,15 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 //how to I add a number to the const chosen to return the alternative Tetromino shapes above
-  // function rotate() {
-  //   let current = theTetrominoes[random]
-  //   current.forEach( index => {
-  //     squares[currentPosition + index].classList.add('block')
-  //   })
-  //   let current = current+'2'
-  //   console.log(current)
-  // }
-  // rotate()
+
 
 
 
