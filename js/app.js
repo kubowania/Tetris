@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //     return autoDrop()
   //   }
   // }
-  setInterval(autoDrop, 200)
+  setInterval(autoDrop, 1000)
 
   function gameLoop() {
     const currentIndex = 0
