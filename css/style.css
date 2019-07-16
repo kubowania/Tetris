@@ -71,6 +71,17 @@ h2 {
   height: 400px;
 }
 
+.previous-shape {
+  width: 100px;
+  margin: 57px;
+}
+
+.previous-grid {
+  width:60px;
+  height: 60px;
+  background-color: blue;
+}
+
 .block {
   background-image: url(/Users/limit/development/Tetris/images/blue_block.png);
   /* background-color: #4BC39B; */

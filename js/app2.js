@@ -4,8 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const scoreDisplay = document.querySelector('.score-display')
   let currentScore = +scoreDisplay.textContent
   let currentIndex = 0
+  let currentRotation = 0
   const width = 10
   const height = 20
+
+
 
   //assign functions to keycodes
   function control(e) {
@@ -22,17 +25,38 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keyup', control)
 
   //The Tetrominoes
-  const lTetromino = [1,width+1,width*2+1,width*2+2]
-  const zTetromino = [width+1, width+2,width*2,width*2+1]
-  const tTetromino = [1,width,width+1,width+2]
+  const lTetromino = [
+    [1,width+1,width*2+1,2],
+    [width,width+1,width+2,width*2+2],
+    [1,width+1,width*2+1,width*2],
+    [width,width*2,width*2+1,width*2+2]
+  ]
+
+  const zTetromino = [
+    [0,width,width+1,width*2+1],
+    [width+1, width+2,width*2,width*2+1]
+  ]
+
+  const tTetromino = [
+    [1,width,width+1,width+2],
+    [1,width+1,width+2,width*2+1],
+    [width,width+1,width+2,width*2+1],
+    [1,width,width+1,width*2+1]
+  ]
+
   const oTetromino = [0,1,width,width+1]
-  const iTetromino = [1,width+1,width*2+1,width*3+1]
+
+  const iTetromino = [
+    [1,width+1,width*2+1,width*3+1],
+    [width,width+1,width+2,width+3]
+  ]
 
   let theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
   //Randomly Select Tetromino
   let random = Math.ceil(Math.random()*theTetrominoes.length)-1
-  let current = theTetrominoes[random]
+  let current = theTetrominoes[random][currentRotation]
+  // console.log(current)
 
   //move the Tetromino moveDown
   let currentPosition = 4
@@ -60,7 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
     freeze()
   }
   moveDown()
+
+  // startBtn.addEventListener('click', () => {
   setInterval(moveDown, 1000)
+  // })
 
   //move left
   function moveright() {
@@ -96,64 +123,26 @@ document.addEventListener('DOMContentLoaded', () => {
   freeze()
 
   //Rotate the Tetromino
-  const lTetromino2 = [width,width+1,width+2,width*2+2]
-  const zTetromino2 = [0,width,width+1,width*2+1]
-  const tTetromino2 = [1,width+1,width+2,width*2+1]
-  const oTetromino2 = [0,1,width,width+1]
-  const iTetromino2 = [width,width+1,width+2,width+3]
-
-  const lTetromino3 = [width+1, width+2,width*2,width*2+1]
-  const zTetromino3 = [width+1,width+2,width*2,width*2+1]
-  const tTetromino3 = [width,width+1,width+2,width*2+1]
-  const oTetromino3 = [0,1,width,width+1]
-  const iTetromino3 = [1,width+1,width*2+1,width*3+1]
-
-  const lTetromino4 = [width,width*2,width*2+1,width*2+2]
-  const zTetromino4 = [0,width,width+1,width*2+1]
-  const tTetromino4 = [1,width,width+1,width*2+1]
-  const oTetromino4 = [0,1,width,width+1]
-  const iTetromino4 = [1,width+1,width*2+1,width*3+1]
-
-
-  //how to I add a number to the const chosen to return the alternative Tetromino shapes above
   function rotate() {
-    draw()
     undraw()
+    current = theTetrominoes[random][currentRotation]
+    draw()
     console.log(current)
-    if (current === lTetromino) {
-      current = lTetromino2
+    currentRotation ++
+    if(currentRotation === current.length) {
+      currentRotation=0
       console.log(current)
-      current.forEach( index => {
-        squares[currentPosition + index].classList.add('block')
-      })
-    } if (current === zTetromino) {
-      current = zTetromino2
-      console.log(current)
-      current.forEach( index => {
-        squares[currentPosition + index].classList.add('block')
-      })
-    }if (current === tTetromino) {
-      current = tTetromino2
-      console.log(current)
-      current.forEach( index => {
-        squares[currentPosition + index].classList.add('block')
-      })
-    }if (current === oTetromino) {
-      current = oTetromino2
-      console.log(current)
-      current.forEach( index => {
-        squares[currentPosition + index].classList.add('block')
-      })
-    }if (current === iTetromino) {
-      current = iTetromino2
-      console.log(current)
-      current.forEach( index => {
-        squares[currentPosition + index].classList.add('block')
-      })
     }
     draw()
   }
 
+
+//show previous tetromino in scoreDisplay
+// function previousTetromino() {
+//
+//   }
+//
+// previousTetromino()
 
   //score
   // let currentScore = 0
@@ -174,7 +163,13 @@ document.addEventListener('DOMContentLoaded', () => {
   //
   // //Lines to remove
   // function removeLine () {
-  //   squares[currentIndex,currentIndex+1,currentIndex+2,currentIndex+3,currentIndex+4,currentIndex+5,currentIndex+6,currentIndex+7,currentIndex+8,currentIndex+9].classList.remove('block2')
+  //   let y = 0
+  //   let point = 1
+  //
+  //   while (y < width) {
+  //
+  //   }
+  //
   // }
   //
   // function removeFourLines() {
