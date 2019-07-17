@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const squares = document.querySelectorAll('.grid div')
+  const grid = document.querySelector('.grid')
+  let squares = Array.from(grid.querySelectorAll('div'))
   const startBtn = document.querySelector('.button')
   const scoreDisplay = document.querySelector('.score-display')
   let currentIndex = 0
@@ -67,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //Color tetrominoes at random
   // var colors = ['url(/Users/limit/development/Tetris/images/blue_block.png)', 'url(/Users/limit/development/Tetris/images/purple_block.png)', 'url(/Users/limit/development/Tetris/images/green_block.png)','url(/Users/limit/development/Tetris/images/navy_block.png)','url(/Users/limit/development/Tetris/images/pink_block.png)']
   // var randomColor = colors[Math.floor(Math.random() * colors.length)]
-  // document.querySelectorAll('.block').style.background-image = randomColor
+  // document.querySelector('.block').style.background = `${randomColor}`
 
   //move the Tetromino moveDown
   let currentPosition = 4
@@ -78,16 +79,18 @@ document.addEventListener('DOMContentLoaded', () => {
       squares[currentPosition + index].classList.add('block')
     })
   }
-
+// document.querySelector('.block').style.background = `${randomColor}`
   //undraw the shape
   function undraw() {
     current.forEach( index => {
       squares[currentPosition + index].classList.remove('block')
+
     })
   }
 
   //move down on loop
   function moveDown() {
+
     draw()
     undraw()
     currentPosition = currentPosition += width
@@ -127,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //freeze the shape
   function freeze() {
     // if block has settled
-    if(current.some(index => squares[currentPosition + index + width].classList.contains('block2', 'block3'))) {
+    if(current.some(index => squares[currentPosition + index + width].classList.contains('block3') || squares[currentPosition + index + width].classList.contains('block2'))) {
       // make it block2
       current.forEach(index => squares[index + currentPosition].classList.add('block2'))
       // start a new tetromino falling
@@ -154,24 +157,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   //Game Over
-  function gameOver() {
-    let gameOverHeight = [currentIndex,currentIndex+width,currentIndex+width*2,currentIndex+width*3,currentIndex+width*4,currentIndex+width*5,currentIndex+width*6,currentIndex+width*7,currentIndex+width*8,currentIndex+width*9,currentIndex+width*10,currentIndex+width*11,currentIndex+width*12,currentIndex+width*13,currentIndex+width*14,currentIndex+width*15,currentIndex+width*16,currentIndex+width*17,currentIndex+width*18,currentIndex+width*19]
-    function containsBlocks(element, index){
-      return squares[gameOverHeight[index]].classList.contains('block2', 'block')
-    }
-    for (currentIndex = 0; currentIndex < 199;currentIndex += width) {
-      console.log(currentIndex)
-      gameOverHeight = [currentIndex,currentIndex+width,currentIndex+width*2,currentIndex+width*3,currentIndex+width*4,currentIndex+width*5,currentIndex+width*6,currentIndex+width*7,currentIndex+width*8,currentIndex+width*9,currentIndex+width*10,currentIndex+width*11,currentIndex+width*12,currentIndex+width*13,currentIndex+width*14,currentIndex+width*15,currentIndex+width*16,currentIndex+width*17,currentIndex+width*18,currentIndex+width*19]
-      if(gameOverHeight.every(containsBlocks)) {
-        console.log('gameOver')
-        scoreDisplay.innerHTML = 'End'
-      }
-    }
-  }
-
-  gameOver()
-
-
+  // function gameOver() {
+  //   if
+  // }
+  // gameOver()
 
   //show previous tetromino in scoreDisplay
   theTetrominoes[random][currentRotation]
@@ -199,42 +188,30 @@ document.addEventListener('DOMContentLoaded', () => {
   displayShape()
 
 
-
   //Add score
   function addScore() {
-    let row = [currentIndex,currentIndex+1,currentIndex+2,currentIndex+3,currentIndex+4,currentIndex+5,currentIndex+6,currentIndex+7,currentIndex+8,currentIndex+9]
-    function containsBlock2(element, index){
-      return squares[row[index]].classList.contains('block2')
-    }
     for (currentIndex = 0; currentIndex < 199;currentIndex += width) {
       console.log(currentIndex)
-      row = [currentIndex,currentIndex+1,currentIndex+2,currentIndex+3,currentIndex+4,currentIndex+5,currentIndex+6,currentIndex+7,currentIndex+8,currentIndex+9]
-      if(row.every(containsBlock2)) {
+      const row = [currentIndex,currentIndex+1,currentIndex+2,currentIndex+3,currentIndex+4,currentIndex+5,currentIndex+6,currentIndex+7,currentIndex+8,currentIndex+9]
+      if(row.every(index => squares[index].classList.contains('block2'))) {
         score += 10
-        console.log(score)
         scoreDisplay.innerHTML = score
-      // removeLine()
+        row.forEach(index => squares[index].classList.remove('block2') || squares[index].classList.remove('block'))
+        const squaresRemoved = squares.splice(currentIndex,width)
+        console.log(currentIndex, squaresRemoved)
+        squares = squaresRemoved.concat(squares)
+        console.log(squares)
+        squares.forEach(cell => grid.appendChild(cell))
+        // removeLine()
       }
     }
   }
   console.log(score)
 
 
-
-  // //Lines to remove
-  // function removeLine(){
-  //
-  // }
-
-
-
   // function removeFourLines() {
   //
   // }
-
-  //present Score
-
-
 
   //Styling eventListeners
 
