@@ -53,6 +53,8 @@ h2 {
   font-weight:300;
   color: rgb(133,121,107,0.5);
   padding-left: 15px;
+  padding-bottom: 0px;
+  margin-bottom: 20px;
 }
 
 .column-left {
@@ -61,6 +63,7 @@ h2 {
   justify-content: center;
   display: inline;
 }
+
 
 .game {
   width: 300px;
@@ -73,35 +76,35 @@ h2 {
 
 .previous-shape {
   width: 100px;
-  margin: 57px;
+  margin-left: 57px;
 }
 
 .previous-grid {
-  width:60px;
-  height: 60px;
-  background-color: blue;
+  width:80px;
+  height: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 80px;
 }
 
 .block {
   background-image: url(/Users/limit/development/Tetris/images/blue_block.png);
-  /* background-color: #4BC39B; */
 }
 
 .block2 {
   background-image: url(/Users/limit/development/Tetris/images/purple_block.png);
-  /* background-color: #4BC39B; */
 }
 
-.oTetromino {
-  background-color: green;
+.block3 {
+  background-image: url(/Users/limit/development/Tetris/images/green_block.png);
 }
 
-.lTetromino {
-  background-color: yellow;
+.block4 {
+  background-image: url(/Users/limit/development/Tetris/images/navy_block.png);
 }
 
-.zTetromino {
-  background-color: orange;
+.block5 {
+  background-image: url(/Users/limit/development/Tetris/images/pink_block.png);
 }
 
 .tTetromino {
