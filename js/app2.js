@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentIndex = 0
   let currentRotation = 0
   const width = 10
-  // const height = 20
   let score = 0
 
   //assign functions to keycodes
@@ -90,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //move down on loop
   function moveDown() {
-
     draw()
     undraw()
     currentPosition = currentPosition += width
@@ -157,10 +155,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   //Game Over
-  // function gameOver() {
-  //   if
-  // }
-  // gameOver()
+  function gameOver() {
+    if(squares[10].classList.contains('block2')) {
+      scoreDisplay.innerHTML = 'end'
+    }else if(squares[11].classList.contains('block2')) {
+      scoreDisplay.innerHTML = 'end'
+    }else if(squares[12].classList.contains('block2')) {
+      scoreDisplay.innerHTML = 'end'
+    }else if(squares[13].classList.contains('block2')) {
+      scoreDisplay.innerHTML = 'end'
+    }else if (squares[14].classList.contains('block2')) {
+      scoreDisplay.innerHTML = 'end'
+    }
+
+  }
+
+
+  gameOver()
 
   //show previous tetromino in scoreDisplay
   theTetrominoes[random][currentRotation]
@@ -197,12 +208,12 @@ document.addEventListener('DOMContentLoaded', () => {
         score += 10
         scoreDisplay.innerHTML = score
         row.forEach(index => squares[index].classList.remove('block2') || squares[index].classList.remove('block'))
+        //splice array
         const squaresRemoved = squares.splice(currentIndex,width)
         console.log(currentIndex, squaresRemoved)
         squares = squaresRemoved.concat(squares)
         console.log(squares)
         squares.forEach(cell => grid.appendChild(cell))
-        // removeLine()
       }
     }
   }

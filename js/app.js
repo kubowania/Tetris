@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //Make the The Tetrominoes move left, right and down on the board
   function moveSquare(e) {
-
     squares[currentIndex].classList.remove('block')
 
     switch(e.keyCode) {
