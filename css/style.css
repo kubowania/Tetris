@@ -44,17 +44,32 @@ h2 {
   color: #d8edea;
 }
 
+h3 {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 300;
+  color: #d8edea;
+  margin-top: 100px;
+  margin-left: -60px;
+}
+
 .score-display {
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   font-size: 50px;
-  letter-spacing: 15px;
+  letter-spacing: 2px;
   font-weight:300;
   color: rgb(133,121,107,0.5);
-  padding-left: 15px;
+  padding-left: 0px;
   padding-bottom: 0px;
   margin-bottom: 20px;
+  margin-top: 15px;
+  padding-top: 0px;
 }
+
+
 
 .column-left {
   width: 300px;
@@ -107,19 +122,8 @@ h2 {
   background-image: url(/Users/limit/development/Tetris/images/pink_block.png);
 }
 
-.tTetromino {
-  background-color: purple;
-}
-
-.iTetromino {
-  background-color: brown;
-}
-
-.takenBlock {
-  background-color: blue;
-}
-
 .grid {
+  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   width: 200px;
@@ -133,7 +137,7 @@ h2 {
 .button {
 	position: relative;
 	width:220px;
-	height:20px;
+	height:22px;
 	text-align:center;
 	color:#FFF;
   text-transform: uppercase;
@@ -203,20 +207,6 @@ h2 {
 
 .end {
   background-image: url(/Users/limit/development/Tetris/images/blue_block.png)
-
-  /* background-image:-webkit-linear-gradient(top, #d8edea, #cadbd8);
-  background-image:-moz-linear-gradient(top, #d8edea, #cadbd8);
-  background-image:-ms-linear-gradient(top, #d8edea, #cadbd8);
-  background-image:-o-linear-gradient(top, #d8edea, #cadbd8);
-  background-image:linear-gradient(to bottom, #d8edea, #cadbd8); */
-
-  /* -webkit-border-radius:5px;
-  -moz-border-radius:5px;
-  border-radius:5px;
-
-  -webkit-box-shadow:0 1px 0 rgba(255, 255, 255, .5) inset, 0 -1px 0 rgba(255, 255, 255, .1) inset, 0 4px 0 #9daba8, 0 4px 2px rgba(0, 0, 0, .5);
-  -moz-box-shadow:0 1px 0 rgba(255, 255, 255, .5) inset, 0 -1px 0 rgba(255, 255, 255, .1) inset, 0 4px 0 #9daba8, 0 4px 2px rgba(0, 0, 0, .5);
-  box-shadow:0 1px 0 rgba(255, 255, 255, .5) inset, 0 -1px 0 rgba(255, 255, 255, .1) inset, 0 4px 0 #9daba8, 0 4px 2px rgba(0, 0, 0, .5); */
 }
 
 .display {
@@ -235,23 +225,23 @@ border-radius:5px;
 box-shadow:0 1px 2px rgba(0, 0, 0, .5) inset, 0 1px 0 #FFF;
 }
 
-.score {
+.score{
   padding-top: 15px;
   letter-spacing: 1px;
   font-size: 12px;
   color: #85796b;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.lines-display {
+  letter-spacing: 1px;
+  font-size: 12px;
+  color: #85796b;
+  margin-left: -60px;
 }
 
 /*menu*/
-
-:root {
-  --primary-color: rgba(13, 110, 139, 0.75);
-  --secondary-color: rgba(229, 148, 0, 0.9);
-  --overlay-color: rgba(24, 39, 51, 0.85);
-  --menu-speed: 0.75s;
-}
-
-
 .container {
   max-width: 600px;
   padding: 0 3rem;
@@ -290,7 +280,7 @@ box-shadow:0 1px 2px rgba(0, 0, 0, .5) inset, 0 1px 0 #FFF;
   width: 40px;
   height:40px;
   padding: 1rem;
-  background: var(--primary-color);
+  background: rgba(13, 110, 139, 0.75);
   align-items: center;
   justify-content: center;
 }
@@ -337,32 +327,31 @@ box-shadow:0 1px 2px rgba(0, 0, 0, .5) inset, 0 1px 0 #FFF;
 /* Rotate On Hover When Checked */
 .menu-wrap .toggler:checked:hover + .hamburger > div { transform: rotate(225deg); }
 
-/* Show Menu */
-.menu-wrap .toggler:checked ~ .menu {
-  visibility: visible;
-}
 
-.menu-wrap .toggler:checked ~ .menu > div {
-  transform: scale(1);
-  transition-duration: var(--menu-speed);
-}
-
-.menu-wrap .toggler:checked ~ .menu > div > div {
-  opacity: 1;
-  transition: ease 0.4s;
-}
-
-.menu-wrap .menu {
-  position: fixed;
-  top: 0;
-  left: 0;
+.menu {
   display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
-  visibility: hidden;
-  overflow: hidden;
-  align-items: center;
-  justify-content: center;
+  overflow: auto;
+  background-color: rgba(24, 39, 51, 0.85);
+}
+
+.menu-content {
+    text-align: center;
+    width: 600px;
+    align-items: center;
+    margin-top: 230px;
+    justify-content: center;
+    width: 200vw;
+    height: 200vh;
+    border-radius: 50%;
+    transition: all 0.8s ease;
+
 }
 
 p {
@@ -371,23 +360,16 @@ p {
   font-weight: 300;
   color: #d8edea;
   transition: color 0.4s ease;
-
 }
 
 .bold {
   color:	#f8de7e;
 }
 
-.menu-wrap .menu > div {
-  display: flex;
-  flex-direction: column;
-  width: 200vw;
-  height: 200vh;
-  background: var(--overlay-color);
-  border-radius: 50%;
-  flex: none;
-  align-items: center;
-  justify-content: center;
-  transform: scale(0);
-  transition: all 0.4s ease;
+.close {
+  border-style: none;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  color:rgba(24, 39, 51, 0.85);
 }
