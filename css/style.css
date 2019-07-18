@@ -103,23 +103,23 @@ h3 {
 }
 
 .block {
-  background-image: url(/Users/limit/development/Tetris/images/blue_block.png);
+  background-image: url(../images/blue_block.png);
 }
 
 .block2 {
-  background-image: url(/Users/limit/development/Tetris/images/purple_block.png);
+  background-image: url(../images/purple_block.png);
 }
 
 .block3 {
-  background-image: url(/Users/limit/development/Tetris/images/green_block.png);
+  background-image: url(../images/green_block.png);
 }
 
 .block4 {
-  background-image: url(/Users/limit/development/Tetris/images/navy_block.png);
+  background-image: url(../images/navy_block.png);
 }
 
 .block5 {
-  background-image: url(/Users/limit/development/Tetris/images/pink_block.png);
+  background-image: url(../images/pink_block.png);
 }
 
 .grid {

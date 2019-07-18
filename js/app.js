@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let score = 0
   let lines = 0
   let timerId
+  let nextRandom = 0
 
   //assign functions to keycodes
   function control(e) {
@@ -64,12 +65,17 @@ document.addEventListener('DOMContentLoaded', () => {
     [width,width+1,width+2,width+3]
   ]
 
-  let theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
+  const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
   //Randomly Select Tetromino
-  let random = Math.ceil(Math.random()*theTetrominoes.length)-1
+  let random = Math.floor(Math.random()*theTetrominoes.length)
   let current = theTetrominoes[random][currentRotation]
-console.log(current)
+
+  // function nextRandom() {
+  //   let nextRandom = theTetrominoes[random][currentRotation]
+  //   const nextRandomSmall = smallTetrominoes[random]
+  //   console.log(nextRandom)
+  // }
   //Color tetrominoes at random
   // var colors = ['url(/Users/limit/development/Tetris/images/blue_block.png)', 'url(/Users/limit/development/Tetris/images/purple_block.png)', 'url(/Users/limit/development/Tetris/images/green_block.png)','url(/Users/limit/development/Tetris/images/navy_block.png)','url(/Users/limit/development/Tetris/images/pink_block.png)']
   // var randomColor = colors[Math.floor(Math.random() * colors.length)]
@@ -104,6 +110,8 @@ console.log(current)
   startBtn.addEventListener('click', () => {
     draw()
     timerId = setInterval(moveDown, 1000)
+    nextRandom = Math.floor(Math.random()*theTetrominoes.length)
+    displayShape()
   })
 
   //move left and prevent collisions with shapes moving left
@@ -135,10 +143,12 @@ console.log(current)
       // make it block2
       current.forEach(index => squares[index + currentPosition].classList.add('block2'))
       // start a new tetromino falling
-      random = Math.ceil(Math.random()*theTetrominoes.length)-1
+      random = nextRandom
+      nextRandom = Math.floor(Math.random() * theTetrominoes.length)
       current = theTetrominoes[random][currentRotation]
       currentPosition = 4
       draw()
+      displayShape()
       addScore()
       gameOver()
     }
@@ -165,7 +175,7 @@ console.log(current)
   }
 
   //show previous tetromino in scoreDisplay
-  theTetrominoes[random][currentRotation]
+  // theTetrominoes[random][currentRotation]
   const displayWidth = 4
   const displaySquares = document.querySelectorAll('.previous-grid div')
   let displayIndex = 0
@@ -178,14 +188,12 @@ console.log(current)
     [1,displayWidth+1,displayWidth*2+1,displayWidth*3+1]  /* iTetromino */
   ]
 
-  const nextCurrent = smallTetrominoes[random]
-
   function displayShape() {
-    nextCurrent.forEach( index => {
+    displaySquares.forEach(square => square.classList.remove('block'))
+    smallTetrominoes[nextRandom].forEach( index => {
       displaySquares[displayIndex + index].classList.add('block')
     })
   }
-  displayShape()
 
   //Add score
   function addScore() {
