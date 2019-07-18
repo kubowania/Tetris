@@ -14,6 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let lines = 0
   let timerId
   let nextRandom = 0
+  const colors = [
+    'url(images/blue_block.png)',
+    'url(images/pink_block.png)',
+    'url(images/navy_block.png)',
+    'url(images/navy_block.png)',
+    'url(images/navy_block.png)'
+  ]
 
   //assign functions to keycodes
   function control(e) {
@@ -71,15 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let random = Math.floor(Math.random()*theTetrominoes.length)
   let current = theTetrominoes[random][currentRotation]
 
-  // function nextRandom() {
-  //   let nextRandom = theTetrominoes[random][currentRotation]
-  //   const nextRandomSmall = smallTetrominoes[random]
-  //   console.log(nextRandom)
-  // }
-  //Color tetrominoes at random
-  // var colors = ['url(/Users/limit/development/Tetris/images/blue_block.png)', 'url(/Users/limit/development/Tetris/images/purple_block.png)', 'url(/Users/limit/development/Tetris/images/green_block.png)','url(/Users/limit/development/Tetris/images/navy_block.png)','url(/Users/limit/development/Tetris/images/pink_block.png)']
-  // var randomColor = colors[Math.floor(Math.random() * colors.length)]
-  // document.querySelector('.block').style.background = `${randomColor}`
 
   //move the Tetromino moveDown
   let currentPosition = 4
@@ -88,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function draw() {
     current.forEach( index => {
       squares[currentPosition + index].classList.add('block')
+      squares[currentPosition + index].style.backgroundImage = colors[random]
     })
   }
 
@@ -95,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function undraw() {
     current.forEach( index => {
       squares[currentPosition + index].classList.remove('block')
+      squares[currentPosition + index].style.backgroundImage = 'none'
 
     })
   }
@@ -189,9 +189,13 @@ document.addEventListener('DOMContentLoaded', () => {
   ]
 
   function displayShape() {
-    displaySquares.forEach(square => square.classList.remove('block'))
+    displaySquares.forEach(square => {
+      square.classList.remove('block')
+      square.style.backgroundImage = 'none'
+    })
     smallTetrominoes[nextRandom].forEach( index => {
       displaySquares[displayIndex + index].classList.add('block')
+      displaySquares[displayIndex + index].style.backgroundImage = colors[nextRandom]
     })
   }
 
