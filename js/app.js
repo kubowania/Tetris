@@ -107,11 +107,23 @@ document.addEventListener('DOMContentLoaded', () => {
     freeze()
   }
 
+  // startBtn.addEventListener('click', () => {
+  //   draw()
+  //   timerId = setInterval(moveDown, 1000)
+  //   nextRandom = Math.floor(Math.random()*theTetrominoes.length)
+  //   displayShape()
+  // })
+
   startBtn.addEventListener('click', () => {
-    draw()
-    timerId = setInterval(moveDown, 1000)
-    nextRandom = Math.floor(Math.random()*theTetrominoes.length)
-    displayShape()
+    if(timerId) {
+      clearInterval(timerId)
+      timerId = null
+    } else {
+      draw()
+      timerId = setInterval(moveDown, 1000)
+      nextRandom = Math.floor(Math.random()*theTetrominoes.length)
+      displayShape()
+    }
   })
 
   //move left and prevent collisions with shapes moving left
@@ -175,7 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   //show previous tetromino in scoreDisplay
-  // theTetrominoes[random][currentRotation]
   const displayWidth = 4
   const displaySquares = document.querySelectorAll('.previous-grid div')
   let displayIndex = 0
