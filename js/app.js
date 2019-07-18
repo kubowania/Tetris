@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const colors = [
     'url(images/blue_block.png)',
     'url(images/pink_block.png)',
-    'url(images/navy_block.png)',
-    'url(images/navy_block.png)',
-    'url(images/navy_block.png)'
+    'url(images/purple_block.png)',
+    'url(images/peach_block.png)',
+    'url(images/yellow_block.png)'
   ]
 
   //assign functions to keycodes
@@ -208,7 +208,11 @@ document.addEventListener('DOMContentLoaded', () => {
         lines +=1
         scoreDisplay.innerHTML = score
         linesDisplay.innerHTML = lines
-        row.forEach(index => squares[index].classList.remove('block2') || squares[index].classList.remove('block'))
+        row.forEach(index => {
+          squares[index].style.backgroundImage = 'none'
+          squares[index].classList.remove('block2') || squares[index].classList.remove('block')
+
+        })
         //splice array
         const squaresRemoved = squares.splice(currentIndex,width)
         squares = squaresRemoved.concat(squares)
@@ -216,7 +220,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
-  console.log(score)
 
   //Styling eventListeners
   hamburgerBtn.addEventListener('click', () => {
