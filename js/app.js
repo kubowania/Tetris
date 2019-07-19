@@ -107,13 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
     freeze()
   }
 
-  // startBtn.addEventListener('click', () => {
-  //   draw()
-  //   timerId = setInterval(moveDown, 1000)
-  //   nextRandom = Math.floor(Math.random()*theTetrominoes.length)
-  //   displayShape()
-  // })
-
   startBtn.addEventListener('click', () => {
     if(timerId) {
       clearInterval(timerId)
