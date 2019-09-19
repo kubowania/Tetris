@@ -5,8 +5,8 @@ Tetris is a tile-matching puzzle game from the 80’s. Try to get your personal 
  
 This was my first project from General Assembly's Software Engineering Immersive Course. It was also my first time building a project with JavaScript.
 
-![Tetris (https://cloud.githubusercontent.com/images/Tetris Game.gif)
-![Tetris](/images/Tetris Game.gif)
+![Tetris (https://github.com/kubowania/Tetris/blob/master/images/Tetris%20Game.gif
+
 
 
 <h2>Brief</h2>
