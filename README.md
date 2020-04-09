@@ -3,6 +3,7 @@ A vanilla javascript game
 
 Watch my tutorial [here](https://www.youtube.com/watch?v=GWPGz9hrVMk)
 
+I have kept the styling at a bare miniumum for you to go wild and make it your own. Please tag me as I would LOVE to see your game!!!
 
 Tetris is a tile-matching puzzle game from the 80’s. Try to get your personal high score by moving each of the 5 randomly selected Tetromino shapes sideways and/or rotating by quarter-turns, so that they form a solid horizontal line without gaps. When such a line is formed, it disappears and any blocks above it fall down to fill the space. For each line you will receive 10 points.
  
