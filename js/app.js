@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const grid = document.querySelector('.grid')
+  // TODO: we can also get the grid size from user
+  const GRID_WIDTH = 10
+  const GRID_HEIGHT = 20
+  const GRID_SIZE = GRID_WIDTH * GRID_HEIGHT
+
+  // no need to type 200 divs :)
+  const grid = createGrid();
   let squares = Array.from(grid.querySelectorAll('div'))
   const startBtn = document.querySelector('.button')
   const hamburgerBtn = document.querySelector('.toggler')
@@ -22,69 +28,96 @@ document.addEventListener('DOMContentLoaded', () => {
     'url(images/yellow_block.png)'
   ]
 
+
+  function createGrid() {
+    // the main grid
+    let grid = document.querySelector(".grid")
+    for (let i = 0; i < GRID_SIZE; i++) {
+      let gridElement = document.createElement("div")
+      grid.appendChild(gridElement)
+    }
+
+    // set base of grid
+    for (let i = 0; i < GRID_WIDTH; i++) {
+      let gridElement = document.createElement("div")
+      gridElement.setAttribute("class", "block3")
+      grid.appendChild(gridElement)
+    }
+
+    let previousGrid = document.querySelector(".previous-grid")
+    // Since 16 is the max grid size in which all the Tetrominoes 
+    // can fit in we create one here
+    for (let i = 0; i < 16; i++) {
+      let gridElement = document.createElement("div")
+      previousGrid.appendChild(gridElement);
+    }
+    return grid;
+  }
+
+
   //assign functions to keycodes
   function control(e) {
-    if(e.keyCode === 39) {
+    if (e.keyCode === 39)
       moveright()
-    } else if (e.keyCode ===38) {
+    else if (e.keyCode === 38)
       rotate()
-    } else if (e.keyCode ===37) {
+    else if (e.keyCode === 37)
       moveleft()
-    } else if (e.keyCode === 40) {
+    else if (e.keyCode === 40)
       moveDown()
-    }
   }
-  document.addEventListener('keyup', control)
+
+  // the classical behavior is to speed up the block if down button is kept pressed so doing that
+  document.addEventListener('keydown', control)
 
   //The Tetrominoes
   const lTetromino = [
-    [1,width+1,width*2+1,2],
-    [width,width+1,width+2,width*2+2],
-    [1,width+1,width*2+1,width*2],
-    [width,width*2,width*2+1,width*2+2]
+    [1, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1, 2],
+    [GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH * 2 + 2],
+    [1, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1, GRID_WIDTH * 2],
+    [GRID_WIDTH, GRID_WIDTH * 2, GRID_WIDTH * 2 + 1, GRID_WIDTH * 2 + 2]
   ]
 
   const zTetromino = [
-    [0,width,width+1,width*2+1],
-    [width+1, width+2,width*2,width*2+1],
-    [0,width,width+1,width*2+1],
-    [width+1, width+2,width*2,width*2+1]
+    [0, GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1],
+    [GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH * 2, GRID_WIDTH * 2 + 1],
+    [0, GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1],
+    [GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH * 2, GRID_WIDTH * 2 + 1]
   ]
 
   const tTetromino = [
-    [1,width,width+1,width+2],
-    [1,width+1,width+2,width*2+1],
-    [width,width+1,width+2,width*2+1],
-    [1,width,width+1,width*2+1]
+    [1, GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH + 2],
+    [1, GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH * 2 + 1],
+    [GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH * 2 + 1],
+    [1, GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1]
   ]
 
   const oTetromino = [
-    [0,1,width,width+1],
-    [0,1,width,width+1],
-    [0,1,width,width+1],
-    [0,1,width,width+1]
+    [0, 1, GRID_WIDTH, GRID_WIDTH + 1],
+    [0, 1, GRID_WIDTH, GRID_WIDTH + 1],
+    [0, 1, GRID_WIDTH, GRID_WIDTH + 1],
+    [0, 1, GRID_WIDTH, GRID_WIDTH + 1]
   ]
 
   const iTetromino = [
-    [1,width+1,width*2+1,width*3+1],
-    [width,width+1,width+2,width+3],
-    [1,width+1,width*2+1,width*3+1],
-    [width,width+1,width+2,width+3]
+    [1, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1, GRID_WIDTH * 3 + 1],
+    [GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH + 3],
+    [1, GRID_WIDTH + 1, GRID_WIDTH * 2 + 1, GRID_WIDTH * 3 + 1],
+    [GRID_WIDTH, GRID_WIDTH + 1, GRID_WIDTH + 2, GRID_WIDTH + 3]
   ]
 
   const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
   //Randomly Select Tetromino
-  let random = Math.floor(Math.random()*theTetrominoes.length)
+  let random = Math.floor(Math.random() * theTetrominoes.length)
   let current = theTetrominoes[random][currentRotation]
 
 
   //move the Tetromino moveDown
   let currentPosition = 4
-
   //draw the shape
   function draw() {
-    current.forEach( index => {
+    current.forEach(index => {
       squares[currentPosition + index].classList.add('block')
       squares[currentPosition + index].style.backgroundImage = colors[random]
     })
@@ -92,10 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //undraw the shape
   function undraw() {
-    current.forEach( index => {
+    current.forEach(index => {
       squares[currentPosition + index].classList.remove('block')
       squares[currentPosition + index].style.backgroundImage = 'none'
-
     })
   }
 
@@ -108,13 +140,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   startBtn.addEventListener('click', () => {
-    if(timerId) {
+    if (timerId) {
       clearInterval(timerId)
       timerId = null
     } else {
       draw()
       timerId = setInterval(moveDown, 1000)
-      nextRandom = Math.floor(Math.random()*theTetrominoes.length)
+      nextRandom = Math.floor(Math.random() * theTetrominoes.length)
       displayShape()
     }
   })
@@ -123,8 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function moveright() {
     undraw()
     const isAtRightEdge = current.some(index => (currentPosition + index) % width === width - 1)
-    if(!isAtRightEdge) currentPosition += 1
-    if(current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
+    if (!isAtRightEdge) currentPosition += 1
+    if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
       currentPosition -= 1
     }
     draw()
@@ -134,8 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function moveleft() {
     undraw()
     const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0)
-    if(!isAtLeftEdge) currentPosition -= 1
-    if(current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
+    if (!isAtLeftEdge) currentPosition -= 1
+    if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
       currentPosition += 1
     }
     draw()
@@ -144,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //freeze the shape
   function freeze() {
     // if block has settled
-    if(current.some(index => squares[currentPosition + index + width].classList.contains('block3') || squares[currentPosition + index + width].classList.contains('block2'))) {
+    if (current.some(index => squares[currentPosition + index + width].classList.contains('block3') || squares[currentPosition + index + width].classList.contains('block2'))) {
       // make it block2
       current.forEach(index => squares[index + currentPosition].classList.add('block2'))
       // start a new tetromino falling
@@ -163,9 +195,9 @@ document.addEventListener('DOMContentLoaded', () => {
   //Rotate the Tetromino
   function rotate() {
     undraw()
-    currentRotation ++
-    if(currentRotation === current.length) {
-      currentRotation=0
+    currentRotation++
+    if (currentRotation === current.length) {
+      currentRotation = 0
     }
     current = theTetrominoes[random][currentRotation]
     draw()
@@ -173,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //Game Over
   function gameOver() {
-    if(current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
+    if (current.some(index => squares[currentPosition + index].classList.contains('block2'))) {
       scoreDisplay.innerHTML = 'end'
       clearInterval(timerId)
     }
@@ -185,11 +217,11 @@ document.addEventListener('DOMContentLoaded', () => {
   let displayIndex = 0
 
   const smallTetrominoes = [
-    [1,displayWidth+1,displayWidth*2+1,2], /* lTetromino */
-    [0,displayWidth,displayWidth+1,displayWidth*2+1],  /* zTetromino */
-    [1,displayWidth,displayWidth+1,displayWidth+2],    /* tTetromino */
-    [0,1,displayWidth,displayWidth+1],     /* oTetromino */
-    [1,displayWidth+1,displayWidth*2+1,displayWidth*3+1]  /* iTetromino */
+    [1, displayWidth + 1, displayWidth * 2 + 1, 2], /* lTetromino */
+    [0, displayWidth, displayWidth + 1, displayWidth * 2 + 1], /* zTetromino */
+    [1, displayWidth, displayWidth + 1, displayWidth + 2], /* tTetromino */
+    [0, 1, displayWidth, displayWidth + 1], /* oTetromino */
+    [1, displayWidth + 1, displayWidth * 2 + 1, displayWidth * 3 + 1] /* iTetromino */
   ]
 
   function displayShape() {
@@ -197,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
       square.classList.remove('block')
       square.style.backgroundImage = 'none'
     })
-    smallTetrominoes[nextRandom].forEach( index => {
+    smallTetrominoes[nextRandom].forEach(index => {
       displaySquares[displayIndex + index].classList.add('block')
       displaySquares[displayIndex + index].style.backgroundImage = colors[nextRandom]
     })
@@ -205,11 +237,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //Add score
   function addScore() {
-    for (currentIndex = 0; currentIndex < 199;currentIndex += width) {
-      const row = [currentIndex,currentIndex+1,currentIndex+2,currentIndex+3,currentIndex+4,currentIndex+5,currentIndex+6,currentIndex+7,currentIndex+8,currentIndex+9]
-      if(row.every(index => squares[index].classList.contains('block2'))) {
+    for (currentIndex = 0; currentIndex < GRID_SIZE; currentIndex += GRID_WIDTH) {
+      const row = [currentIndex, currentIndex + 1, currentIndex + 2, currentIndex + 3, currentIndex + 4, currentIndex + 5, currentIndex + 6, currentIndex + 7, currentIndex + 8, currentIndex + 9]
+      if (row.every(index => squares[index].classList.contains('block2'))) {
         score += 10
-        lines +=1
+        lines += 1
         scoreDisplay.innerHTML = score
         linesDisplay.innerHTML = lines
         row.forEach(index => {
@@ -218,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         })
         //splice array
-        const squaresRemoved = squares.splice(currentIndex,width)
+        const squaresRemoved = squares.splice(currentIndex, width)
         squares = squaresRemoved.concat(squares)
         squares.forEach(cell => grid.appendChild(cell))
       }
