@@ -244,6 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lines += 1
         scoreDisplay.innerHTML = score
         linesDisplay.innerHTML = lines
+        undraw()
         row.forEach(index => {
           squares[index].style.backgroundImage = 'none'
           squares[index].classList.remove('block2') || squares[index].classList.remove('block')
@@ -253,6 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const squaresRemoved = squares.splice(currentIndex, width)
         squares = squaresRemoved.concat(squares)
         squares.forEach(cell => grid.appendChild(cell))
+        draw()
       }
     }
   }
