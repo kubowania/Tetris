@@ -1,7 +1,7 @@
 # Tetris
 A vanilla javascript game
 
-Watch my tutorial [here](https://www.youtube.com/watch?v=GWPGz9hrVMk)
+Watch my tutorial [here](https://youtu.be/w1JJfK09ujQ)
 
 I have kept the styling at a bare miniumum for you to go wild and make it your own. Please tag me as I would LOVE to see your game!!!
 
